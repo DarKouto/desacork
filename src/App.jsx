@@ -6,6 +6,7 @@ function App() {
   return (
     <>
     <HeroSection />
+    <div id="content-start"></div>
     <Contactos />
     <Footer />
     </>
