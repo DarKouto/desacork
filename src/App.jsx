@@ -1,20 +1,24 @@
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import Contactos from './components/Contactos';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <>
-      <Typography variant="h1" component="h1" gutterBottom>
-        Isto é um título
-      </Typography>
+      <ThemeProvider theme={theme}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Desacork: Indústria e Comércio de Cortiça
+        </Typography>
 
-      <Typography variant="body1" component="p" sx={{ mb: 4 }}>
-        Isto é um parágrafo
-      </Typography>
+        <Typography variant="h4" component="p" sx={{ mb: 4 }}>
+          Site em construção
+        </Typography>
 
-      <Button variant="contained" color="primary" onClick={() => alert('Olá do Material UI!')}>
-        Clica-me!
-      </Button>
+        <Contactos />
+        <Footer />
+      </ThemeProvider>
     </>
   )
 }
