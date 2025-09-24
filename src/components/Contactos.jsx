@@ -68,7 +68,7 @@ function Contactos() {
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
             <PhoneIcon sx={{ mr: 1 }} />
-            <Typography variant="body1">227 449 428</Typography>
+            <Typography variant="body1">227 449 428 (rede fixa nacional)</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
             <EmailIcon sx={{ mr: 1 }} />
