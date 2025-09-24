@@ -41,10 +41,10 @@ function HeroSection() {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h1" component="h1" gutterBottom>
+        <Typography variant="h3" component="h1" gutterBottom>
           Desacork
         </Typography>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h6" component="h1" gutterBottom>
           Indústria e Comércio de Cortiça
         </Typography>
 
