@@ -6,9 +6,9 @@ import EmailIcon from '@mui/icons-material/Email';
 
 function Contactos() {
   const [formData, setFormData] = useState({
-    nome: '',
+    name: '',
     email: '',
-    mensagem: '',
+    message: '',
   });
 
   const handleChange = (e) => {
@@ -19,13 +19,42 @@ function Contactos() {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://127.0.0.1:5000/contactos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+        setFormData({
+          nome: '',
+          email: '',
+          mensagem: '',
+        });
+      } else {
+        alert(result.error);
+      }
+    } catch (error) {
+      alert("Formulário ainda em construção. Por favor contacte manualmente: desacork@gmail.com");
+      console.error('Erro:', error);
+    }
+  };
+
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom align="center">
         Contactos e Localização
       </Typography>
 
-      <Paper elevation={3} sx={{ p: 4, mt: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
+       <Paper elevation={3} sx={{ p: 4, mt: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
         <Box sx={{ flex: 1 }}>
           <Typography variant="h6" gutterBottom mb={4}>
             Informações de Contacto
@@ -70,14 +99,12 @@ function Contactos() {
         >
           Envie-nos uma mensagem
         </Typography>
-        <input type="hidden" name="_replyto" value={formData.email} />
         <Box
           component="form"
-          action="https://formspree.io/f/xdkworpk"
-          method="POST"
           noValidate
           autoComplete="off"
           sx={{ display: 'flex', flexDirection: 'column' }} 
+          onSubmit={handleSubmit}
         >
           <TextField
             label="Nome"
@@ -85,7 +112,6 @@ function Contactos() {
             fullWidth
             sx={{ mb: 2 }} 
             id="nome"
-            name="nome"
             value={formData.nome} 
             onChange={handleChange} 
           />
@@ -96,7 +122,6 @@ function Contactos() {
             sx={{ mb: 2 }} 
             type="email"
             id="email"
-            name="_replyto" // Usa o atributo _replyto aqui
             value={formData.email} 
             onChange={handleChange}
           />
@@ -107,7 +132,6 @@ function Contactos() {
             multiline
             rows={4}
             id="mensagem" 
-            name="mensagem"
             value={formData.mensagem} 
             onChange={handleChange}
             sx={{ 
