@@ -19,7 +19,7 @@ function HeroSection() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
-        minHeight: '80vh',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -41,25 +41,20 @@ function HeroSection() {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h3" component="h1" gutterBottom>
-          Desacork<br/>
-          Indústria e Comércio de Cortiça
+        <Typography variant="h1" component="h1" gutterBottom>
+          Desacork
         </Typography>
-        <Typography variant="h5" component="h1" gutterBottom>
-          Site em construção
+        <Typography variant="h4" component="h1" gutterBottom>
+          Indústria e Comércio de Cortiça
         </Typography>
 
         <Button
           variant="contained"
           size="large"
+          color="success"
           onClick={handleScrollDown}
           sx={{
             mt: 2,
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            },
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -70,6 +65,7 @@ function HeroSection() {
           }}
         >
           <Typography variant="button" sx={{ mb: 0.5 }}>
+            Site em Construção<br/>
             Ver Contactos e Localização
           </Typography>
           <KeyboardArrowDownIcon />
