@@ -6,9 +6,9 @@ import EmailIcon from '@mui/icons-material/Email';
 
 function Contactos() {
   const [formData, setFormData] = useState({
-    name: '',
+    nome: '',
     email: '',
-    message: '',
+    mensagem: '',
   });
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ function Contactos() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:5000/contactos', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,10 +40,10 @@ function Contactos() {
           mensagem: '',
         });
       } else {
-        alert(result.error);
+        alert(result.message);
       }
     } catch (error) {
-      alert("Formulário ainda em construção. Por favor contacte manualmente: desacork@gmail.com");
+      alert("Ocorreu um erro ao enviar o formulário.");
       console.error('Erro:', error);
     }
   };
@@ -54,7 +54,7 @@ function Contactos() {
         Contactos e Localização
       </Typography>
 
-       <Paper elevation={3} sx={{ p: 4, mt: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
+      <Paper elevation={3} sx={{ p: 4, mt: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
         <Box sx={{ flex: 1 }}>
           <Typography variant="h6" gutterBottom mb={4}>
             Informações de Contacto
@@ -112,6 +112,7 @@ function Contactos() {
             fullWidth
             sx={{ mb: 2 }} 
             id="nome"
+            name="nome"
             value={formData.nome} 
             onChange={handleChange} 
           />
@@ -122,6 +123,7 @@ function Contactos() {
             sx={{ mb: 2 }} 
             type="email"
             id="email"
+            name="email"
             value={formData.email} 
             onChange={handleChange}
           />
@@ -132,6 +134,7 @@ function Contactos() {
             multiline
             rows={4}
             id="mensagem" 
+            name="mensagem"
             value={formData.mensagem} 
             onChange={handleChange}
             sx={{ 
