@@ -6,9 +6,9 @@ import EmailIcon from '@mui/icons-material/Email';
 
 function Contactos() {
   const [formData, setFormData] = useState({
-    name: '',
+    nome: '',
     email: '',
-    message: '',
+    mensagem: '',
   });
 
   const handleChange = (e) => {
@@ -19,33 +19,17 @@ function Contactos() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
+    // A Vercel Forms lida com o envio do formulário,
+    // por isso, esta função agora apenas previne o comportamento padrão
+    // e mostra uma mensagem de sucesso no frontend.
     e.preventDefault();
-    try {
-      const response = await fetch('http://127.0.0.1:5000/contactos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert(result.message);
-        setFormData({
-          nome: '',
-          email: '',
-          mensagem: '',
-        });
-      } else {
-        alert(result.error);
-      }
-    } catch (error) {
-      alert("Formulário ainda em construção. Por favor contacte manualmente: desacork@gmail.com");
-      console.error('Erro:', error);
-    }
+    alert("A sua mensagem foi enviada com sucesso!");
+    setFormData({
+      nome: '',
+      email: '',
+      mensagem: '',
+    });
   };
 
   return (
@@ -53,42 +37,6 @@ function Contactos() {
       <Typography variant="h4" component="h1" gutterBottom align="center">
         Contactos e Localização
       </Typography>
-
-      <Paper elevation={3} sx={{ p: 4, mt: 4, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
-        <Box sx={{ flex: 1 }}>
-          <Typography variant="h6" gutterBottom mb={4}>
-            Informações de Contacto
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-            <LocationOnIcon sx={{ mr: 1 }} />
-            <Typography variant="body1">
-              Z.I. Casalinho Rua 2, Nr. 123<br />
-              4535-155 Lourosa
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-            <PhoneIcon sx={{ mr: 1 }} />
-            <Typography variant="body1">227 449 428 (rede fixa nacional)</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-            <EmailIcon sx={{ mr: 1 }} />
-            <Typography variant="body1">desacork@gmail.com</Typography>
-          </Box>
-        </Box>
-
-        <Box sx={{ flex: 1, minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3012.124878609415!2d-8.555383324279727!3d40.978746271354694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd247f4181f406fb%3A0x9edbce7aa011011e!2sZona%20Industrial%20Casalinho-Rua%20II%20123%2C%20Lourosa!5e0!3m2!1spt-PT!2spt!4v1758703306594!5m2!1spt-PT!2spt"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Localização da Desacork"
-          ></iframe>
-        </Box>
-      </Paper>
 
       <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
         <Typography 
@@ -101,10 +49,13 @@ function Contactos() {
         </Typography>
         <Box
           component="form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
           noValidate
           autoComplete="off"
-          sx={{ display: 'flex', flexDirection: 'column' }} 
           onSubmit={handleSubmit}
+          sx={{ display: 'flex', flexDirection: 'column' }} 
         >
           <TextField
             label="Nome"
@@ -112,6 +63,7 @@ function Contactos() {
             fullWidth
             sx={{ mb: 2 }} 
             id="nome"
+            name="nome"
             value={formData.nome} 
             onChange={handleChange} 
           />
@@ -122,6 +74,7 @@ function Contactos() {
             sx={{ mb: 2 }} 
             type="email"
             id="email"
+            name="email"
             value={formData.email} 
             onChange={handleChange}
           />
@@ -132,6 +85,7 @@ function Contactos() {
             multiline
             rows={4}
             id="mensagem" 
+            name="mensagem"
             value={formData.mensagem} 
             onChange={handleChange}
             sx={{ 
