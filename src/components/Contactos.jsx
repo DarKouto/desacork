@@ -70,9 +70,11 @@ function Contactos() {
         >
           Envie-nos uma mensagem
         </Typography>
+        // Adiciona um campo de input oculto para o reply-to
+        <input type="hidden" name="_replyto" value={formData.email} />
         <Box
           component="form"
-          action="https://formspree.io/f/xdkworpk"
+          action="https://formspree.io/f/SEU_ENDPOINT_FORM_AQUI"
           method="POST"
           noValidate
           autoComplete="off"
@@ -95,7 +97,7 @@ function Contactos() {
             sx={{ mb: 2 }} 
             type="email"
             id="email"
-            name="email"
+            name="_replyto" // Usa o atributo _replyto aqui
             value={formData.email} 
             onChange={handleChange}
           />
