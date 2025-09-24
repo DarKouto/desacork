@@ -62,7 +62,7 @@ function Contactos() {
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
             <LocationOnIcon sx={{ mr: 1 }} />
             <Typography variant="body1">
-              Z.I. Casalinhoo Rua 2, Nr. 123<br />
+              Z.I. Casalinho Rua 2, Nr. 123<br />
               4535-155 Lourosa
             </Typography>
           </Box>
