@@ -7,18 +7,31 @@ export default async function handler(req, res) {
 
   const { nome, email, mensagem } = req.body;
 
+  // Validação do lado do servidor
+  if (!nome || !email || !mensagem) {
+    return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+  }
+
+  // Validação de formato de email
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    return res.status(400).json({ message: 'O formato do email é inválido.' });
+  }
+
+  // IMPORTANTE: Para o Gmail, precisas de criar uma 'App Password'
+  // Vai às definições de segurança da tua conta Google para a criar.
+  // Depois, adiciona as credenciais no teu projeto Vercel como 'Environment Variables' (Variáveis de Ambiente).
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER, // O teu e-mail do Gmail
-      pass: process.env.EMAIL_PASS, // A tua App Password
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   try {
     const mail = await transporter.sendMail({
       from: `"${nome}" <${email}>`,
-      to: 'desacork@gmail.com', // O teu e-mail de destino
+      to: 'desacork@gmail.com',
       subject: `Nova mensagem de contacto de ${nome}`,
       html: `<p>Olá, acabaste de receber uma nova mensagem do site!</p><br>
              <p><strong>Nome:</strong> ${nome}</p>
