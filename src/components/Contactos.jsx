@@ -11,16 +11,45 @@ function Contactos() {
     mensagem: '',
   });
 
+  const [formErrors, setFormErrors] = useState({});
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
+
+    // Limpa o erro do campo quando o utilizador começa a escrever
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: '',
+    }));
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    if (!formData.nome.trim()) {
+      errors.nome = 'O nome é obrigatório.';
+    }
+    if (!formData.email.trim()) {
+      errors.email = 'O email é obrigatório.';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'O email tem um formato inválido.';
+    }
+    if (!formData.mensagem.trim()) {
+      errors.mensagem = 'A mensagem é obrigatória.';
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -115,7 +144,9 @@ function Contactos() {
             name="nome"
             value={formData.nome} 
             onChange={handleChange}
-            required // Adiciona esta linha
+            required
+            error={!!formErrors.nome}
+            helperText={formErrors.nome}
           />
           <TextField
             label="Email"
@@ -127,7 +158,9 @@ function Contactos() {
             name="email"
             value={formData.email} 
             onChange={handleChange}
-            required // Adiciona esta linha
+            required
+            error={!!formErrors.email}
+            helperText={formErrors.email}
           />
           <TextField
             label="Mensagem"
@@ -145,7 +178,9 @@ function Contactos() {
                 resize: 'vertical',
               },
             }}
-            required // Adiciona esta linha
+            required
+            error={!!formErrors.mensagem}
+            helperText={formErrors.mensagem}
           />
           <Button
             type="submit"
