@@ -17,9 +17,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'O formato do email é inválido.' });
   }
 
-  // IMPORTANTE: Para o Gmail, precisas de criar uma 'App Password'
-  // Vai às definições de segurança da tua conta Google para a criar.
-  // Depois, adiciona as credenciais no teu projeto Vercel como 'Environment Variables' (Variáveis de Ambiente).
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
