@@ -114,7 +114,8 @@ function Contactos() {
             id="nome"
             name="nome"
             value={formData.nome} 
-            onChange={handleChange} 
+            onChange={handleChange}
+            required // Adiciona esta linha
           />
           <TextField
             label="Email"
@@ -126,6 +127,7 @@ function Contactos() {
             name="email"
             value={formData.email} 
             onChange={handleChange}
+            required // Adiciona esta linha
           />
           <TextField
             label="Mensagem"
@@ -142,7 +144,8 @@ function Contactos() {
               '& .MuiInputBase-input': { 
                 resize: 'vertical',
               },
-            }} 
+            }}
+            required // Adiciona esta linha
           />
           <Button
             type="submit"
