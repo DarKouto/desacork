@@ -7,7 +7,7 @@
   <h2>Este será o Footer</h2>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   h2 {
     color: grey;
   }
