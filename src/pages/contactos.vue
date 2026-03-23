@@ -1,14 +1,14 @@
 <script setup>
 import { reactive, ref } from 'vue';
 
-// Estado do formulário
+// 1. Estado dos dados
 const form = reactive({
   nome: '',
   email: '',
   mensagem: ''
 });
 
-// Estado dos erros (para feedback visual nas caixas de texto)
+// 2. Estado dos erros (Obrigatorio para o :error-messages não quebrar)
 const formErrors = reactive({
   nome: '',
   email: '',
@@ -17,11 +17,11 @@ const formErrors = reactive({
 
 const loading = ref(false);
 
-// Função de validação local (evita pedidos desnecessários à Vercel)
+// 3. Função de Validação
 const validateForm = () => {
   let isValid = true;
   
-  // Reset de erros anteriores
+  // Limpa erros anteriores
   formErrors.nome = '';
   formErrors.email = '';
   formErrors.mensagem = '';
@@ -47,12 +47,11 @@ const validateForm = () => {
   return isValid;
 };
 
+// 4. Função de Envio
 const enviarMensagem = async () => {
-  // 1. Validar primeiro
   if (!validateForm()) return;
 
   loading.value = true;
-  
   try {
     const response = await fetch('/api/contact', {
       method: 'POST',
@@ -61,21 +60,14 @@ const enviarMensagem = async () => {
     });
     
     const res = await response.json();
-
+    
     if (response.ok) {
-      // Aqui podes manter o alert de sucesso ou usar uma SnackBar do Vuetify depois
-      alert(res.message); 
-      
-      // Limpar formulário após sucesso
-      form.nome = ''; 
-      form.email = ''; 
-      form.mensagem = '';
+      alert(res.message);
+      form.nome = ''; form.email = ''; form.mensagem = '';
     } else {
-      // Erro vindo do servidor (ex: 400 ou 500)
-      alert(res.message || "Erro ao processar o pedido.");
+      alert(res.message || "Erro no servidor.");
     }
   } catch (error) {
-    console.error("Erro no envio:", error);
     alert("Erro ao ligar ao servidor.");
   } finally {
     loading.value = false;
@@ -85,26 +77,21 @@ const enviarMensagem = async () => {
 
 <template>
 <AppBar />
-
   <v-container class="my-10" style="max-width: 900px;">
     <h1 class="text-h4 text-center mb-10">Contactos e Localização</h1>
+
     <v-card elevation="3" class="pa-8 mt-10">
-      <v-row class="ma-0" style="gap: 32px;"> <v-col cols="12" md="" class="pa-0 flex-grow-1">
+      <v-row class="ma-0" style="gap: 32px;">
+        <v-col cols="12" md="" class="pa-0 flex-grow-1">
           <h2 class="text-h6 mb-8">Informações de Contacto</h2>
-          
           <div class="d-flex align-start mb-6">
             <v-icon color="primary" class="mr-3">mdi-map-marker</v-icon>
-            <div class="text-body-1">
-              Z.I. Casalinho Rua 2, Nr. 123<br />
-              4535-155 Lourosa
-            </div>
+            <div class="text-body-1">Z.I. Casalinho Rua 2, Nr. 123<br />4535-155 Lourosa</div>
           </div>
-
           <div class="d-flex align-center mb-6">
             <v-icon color="primary" class="mr-3">mdi-phone</v-icon>
             <div class="text-body-1">227 449 428 (rede fixa nacional)</div>
           </div>
-
           <div class="d-flex align-center mb-6">
             <v-icon color="primary" class="mr-3">mdi-email</v-icon>
             <div class="text-body-1">desacork@gmail.com</div>
@@ -128,14 +115,13 @@ const enviarMensagem = async () => {
 
     <v-card elevation="3" class="pa-8 mt-10">
       <h2 class="text-h5 mb-8 text-left">Envie-nos uma mensagem</h2>
-      
       <v-form @submit.prevent="enviarMensagem">
         <v-text-field
           v-model="form.nome"
           label="Nome"
           variant="outlined"
-          required
-          hide-details="auto" 
+          hide-details="auto"
+          :error-messages="formErrors.nome"
           class="mb-4"
         ></v-text-field>
 
@@ -144,8 +130,8 @@ const enviarMensagem = async () => {
           label="Email"
           type="email"
           variant="outlined"
-          required
-          hide-details="auto" 
+          hide-details="auto"
+          :error-messages="formErrors.email"
           class="mb-4"
         ></v-text-field>
 
@@ -154,10 +140,9 @@ const enviarMensagem = async () => {
           label="Mensagem"
           variant="outlined"
           rows="4"
-          required
-          hide-details="auto" 
+          hide-details="auto"
+          :error-messages="formErrors.mensagem"
           class="mb-6"
-          style="resize: vertical;"
         ></v-textarea>
 
         <v-btn
@@ -174,7 +159,6 @@ const enviarMensagem = async () => {
       </v-form>
     </v-card>
   </v-container>
-
 <Footer />
 </template>
 
