@@ -1,5 +1,6 @@
 <script setup>
-  const backgroundImage = '/src/images/fundo.jpg'; 
+  import fundoImg from '@/images/fundo.jpg';
+  const backgroundImage = fundoImg; 
 </script>
 
 <template>
@@ -49,8 +50,8 @@
     height: 100%;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.4) 0%, // Um pouco mais escuro no topo
-      rgba(0, 0, 0, 0.6) 100% // Mais escuro na base
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.6) 100%
     );
     z-index: 1;
     pointer-events: none;
