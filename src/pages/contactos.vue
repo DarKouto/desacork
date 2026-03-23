@@ -1,7 +1,15 @@
 <script setup>
 import { reactive, ref } from 'vue';
 
+// Estado do formulário
 const form = reactive({
+  nome: '',
+  email: '',
+  mensagem: ''
+});
+
+// Estado dos erros (para feedback visual nas caixas de texto)
+const formErrors = reactive({
   nome: '',
   email: '',
   mensagem: ''
@@ -9,26 +17,65 @@ const form = reactive({
 
 const loading = ref(false);
 
-const enviarMensagem = async () => {
-  if (!form.nome || !form.email || !form.mensagem) {
-    alert("Por favor, preencha todos os campos.");
-    return;
+// Função de validação local (evita pedidos desnecessários à Vercel)
+const validateForm = () => {
+  let isValid = true;
+  
+  // Reset de erros anteriores
+  formErrors.nome = '';
+  formErrors.email = '';
+  formErrors.mensagem = '';
+
+  if (!form.nome.trim()) {
+    formErrors.nome = 'O nome é obrigatório.';
+    isValid = false;
   }
+
+  if (!form.email.trim()) {
+    formErrors.email = 'O email é obrigatório.';
+    isValid = false;
+  } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+    formErrors.email = 'O email tem um formato inválido.';
+    isValid = false;
+  }
+
+  if (!form.mensagem.trim()) {
+    formErrors.mensagem = 'A mensagem é obrigatória.';
+    isValid = false;
+  }
+
+  return isValid;
+};
+
+const enviarMensagem = async () => {
+  // 1. Validar primeiro
+  if (!validateForm()) return;
+
   loading.value = true;
+  
   try {
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form)
     });
+    
     const res = await response.json();
+
     if (response.ok) {
-      alert(res.message);
-      form.nome = ''; form.email = ''; form.mensagem = '';
+      // Aqui podes manter o alert de sucesso ou usar uma SnackBar do Vuetify depois
+      alert(res.message); 
+      
+      // Limpar formulário após sucesso
+      form.nome = ''; 
+      form.email = ''; 
+      form.mensagem = '';
     } else {
-      alert(res.message);
+      // Erro vindo do servidor (ex: 400 ou 500)
+      alert(res.message || "Erro ao processar o pedido.");
     }
   } catch (error) {
+    console.error("Erro no envio:", error);
     alert("Erro ao ligar ao servidor.");
   } finally {
     loading.value = false;
