@@ -22,14 +22,17 @@
             <p class="text-h5 text-white mb-10">
               A sua parceira de confiança no mundo da cortiça. Soluções inovadoras e sustentáveis para a indústria.
             </p>
+            <p class="text-h5 text-white mb-10">
+              Site em construção
+            </p>
 
             <v-btn
               size="x-large"
               color="secondary"
               elevation="8"
-              to="/sobre-nos"
+              to="/contactos"
             >
-              Saiba Mais
+              Contactos
             </v-btn>
 
           </v-col>
