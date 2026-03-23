@@ -1,24 +1,73 @@
 <script setup>
-  import { ref } from 'vue';
-  const texto = ref('Este é o value da variável texto')
+  const backgroundImage = '/src/images/fundo.jpg'; 
 </script>
 
 <template>
-  <div class="fundo">
-    <h2>Este é o components/HeroSection.vue</h2>
-    <h1>Desacork.com</h1>
-    <p>Com Vue e Vuetify</p>
-    <p>{{ texto }}</p>
-  </div>
+  <v-img
+    :src="backgroundImage"
+    class="align-center"
+    cover
+    height="100vh" 
+  >
+    <div class="hero-content-wrapper">
+      <v-container class="text-center">
+        <v-row justify="center">
+          <v-col cols="12" md="8" lg="6">
+            
+            <h1 class="text-h2 font-weight-bold text-white mb-6">
+              Desacork.com
+            </h1>
+
+            <p class="text-h5 text-white mb-10">
+              A sua parceira de confiança no mundo da cortiça. Soluções inovadoras e sustentáveis para a indústria.
+            </p>
+
+            <v-btn
+              size="x-large"
+              color="secondary"
+              elevation="8"
+              to="/sobre-nos"
+            >
+              Saiba Mais
+            </v-btn>
+
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+  </v-img>
 </template>
 
 <style scoped lang="scss">
-  h2 {
-    color: green;
+.v-img {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4) 0%, // Um pouco mais escuro no topo
+      rgba(0, 0, 0, 0.6) 100% // Mais escuro na base
+    );
+    z-index: 1;
+    pointer-events: none;
   }
-  .fundo {
-    background-image: url("/src/images/fundo.jpg");
-    height: 800px;
-    width: auto;
-  }
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: text; 
+}
+:deep(.text-white) {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 </style>
