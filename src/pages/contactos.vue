@@ -37,7 +37,7 @@ const enviarMensagem = async () => {
 </script>
 
 <template>
-  <AppBar />
+<AppBar />
 
   <v-container class="my-10" style="max-width: 900px;">
     <h1 class="text-h4 text-center mb-10">Contactos e Localização</h1>
@@ -88,6 +88,7 @@ const enviarMensagem = async () => {
           label="Nome"
           variant="outlined"
           required
+          hide-details="auto" 
           class="mb-4"
         ></v-text-field>
 
@@ -97,6 +98,7 @@ const enviarMensagem = async () => {
           type="email"
           variant="outlined"
           required
+          hide-details="auto" 
           class="mb-4"
         ></v-text-field>
 
@@ -106,6 +108,7 @@ const enviarMensagem = async () => {
           variant="outlined"
           rows="4"
           required
+          hide-details="auto" 
           class="mb-6"
           style="resize: vertical;"
         ></v-textarea>
@@ -125,7 +128,7 @@ const enviarMensagem = async () => {
     </v-card>
   </v-container>
 
-  <Footer />
+<Footer />
 </template>
 
 <style scoped>
