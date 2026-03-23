@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
 
-// Estado do formulário
 const form = reactive({
   nome: '',
   email: '',
@@ -15,7 +14,6 @@ const enviarMensagem = async () => {
     alert("Por favor, preencha todos os campos.");
     return;
   }
-
   loading.value = true;
   try {
     const response = await fetch('/api/contact', {
@@ -23,19 +21,14 @@ const enviarMensagem = async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form)
     });
-    
     const res = await response.json();
-    
     if (response.ok) {
-      alert(res.message || "Mensagem enviada com sucesso!");
-      form.nome = '';
-      form.email = '';
-      form.mensagem = '';
+      alert(res.message);
+      form.nome = ''; form.email = ''; form.mensagem = '';
     } else {
-      alert(res.message || "Erro ao enviar a mensagem.");
+      alert(res.message);
     }
   } catch (error) {
-    console.error("Erro ao enviar:", error);
     alert("Erro ao ligar ao servidor.");
   } finally {
     loading.value = false;
@@ -44,125 +37,101 @@ const enviarMensagem = async () => {
 </script>
 
 <template>
-  <v-container class="py-10">
-    <v-row justify="center">
-      <v-col cols="12">
-        <h1 class="text-h3 text-center mb-10">Contactos e Localização</h1>
-      </v-col>
-    </v-row>
+  <AppBar />
 
-    <v-row class="mb-10" align="stretch">
-      <v-col cols="12" md="5">
-        <v-card variant="outlined" class="pa-6 h-100" elevation="1">
-          <div class="mb-8">
-            <h2 class="text-h6 font-weight-bold mb-2 text-primary">Morada</h2>
-            <p class="text-body-1">
-              Z.I. Casalinho Rua 2, Nr. 123<br/>
+  <v-container class="my-10" style="max-width: 900px;">
+    <h1 class="text-h4 text-center mb-10">Contactos e Localização</h1>
+    <v-card elevation="3" class="pa-8 mt-10">
+      <v-row class="ma-0" style="gap: 32px;"> <v-col cols="12" md="" class="pa-0 flex-grow-1">
+          <h2 class="text-h6 mb-8">Informações de Contacto</h2>
+          
+          <div class="d-flex align-start mb-6">
+            <v-icon color="primary" class="mr-3">mdi-map-marker</v-icon>
+            <div class="text-body-1">
+              Z.I. Casalinho Rua 2, Nr. 123<br />
               4535-155 Lourosa
-            </p>
-          </div>
-          
-          <div class="mb-8">
-            <h2 class="text-h6 font-weight-bold mb-2 text-primary">Telefone</h2>
-            <p class="text-body-1">
-              227 449 428 <span class="text-caption text-grey">(rede fixa nacional)</span>
-            </p>
+            </div>
           </div>
 
-          <div class="mb-2">
-            <h2 class="text-h6 font-weight-bold mb-2 text-primary">Email</h2>
-            <p class="text-body-1">desacork@gmail.com</p>
+          <div class="d-flex align-center mb-6">
+            <v-icon color="primary" class="mr-3">mdi-phone</v-icon>
+            <div class="text-body-1">227 449 428 (rede fixa nacional)</div>
           </div>
-        </v-card>
-      </v-col>
 
-      <v-col cols="12" md="7">
-        <div class="map-wrapper">
-          <iframe 
-            src="google.com/maps/embed" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
+          <div class="d-flex align-center mb-6">
+            <v-icon color="primary" class="mr-3">mdi-email</v-icon>
+            <div class="text-body-1">desacork@gmail.com</div>
+          </div>
+        </v-col>
+
+        <v-col cols="12" md="" class="pa-0 flex-grow-1" style="min-height: 300px;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3012.124878609415!2d-8.555383324279727!3d40.978746271354694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd247f4181f406fb%3A0x9edbce7aa011011e!2sZona%20Industrial%20Casalinho-Rua%20II%20123%2C%20Lourosa!5e0!3m2!1spt-PT!2spt!4v1758703306594!5m2!1spt-PT!2spt"
+            width="100%"
+            height="100%"
+            style="border: 0; min-height: 300px; border-radius: 4px;"
+            allowfullscreen=""
+            loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="Localização Desacork"
+            title="Localização da Desacork"
           ></iframe>
-        </div>
-      </v-col>
-    </v-row>
+        </v-col>
+      </v-row>
+    </v-card>
 
-    <v-divider class="my-10"></v-divider>
+    <v-card elevation="3" class="pa-8 mt-10">
+      <h2 class="text-h5 mb-8 text-left">Envie-nos uma mensagem</h2>
+      
+      <v-form @submit.prevent="enviarMensagem">
+        <v-text-field
+          v-model="form.nome"
+          label="Nome"
+          variant="outlined"
+          required
+          class="mb-4"
+        ></v-text-field>
 
-    <v-row justify="center">
-      <v-col cols="12" md="8" lg="6">
-        <v-card elevation="3" class="pa-8">
-          <h2 class="text-h5 mb-6 font-weight-medium">Envie-nos uma mensagem</h2>
-          
-          <v-form @submit.prevent="enviarMensagem">
-            <v-text-field
-              v-model="form.nome"
-              label="Nome"
-              variant="outlined"
-              required
-              density="comfortable"
-              class="mb-2"
-            ></v-text-field>
+        <v-text-field
+          v-model="form.email"
+          label="Email"
+          type="email"
+          variant="outlined"
+          required
+          class="mb-4"
+        ></v-text-field>
 
-            <v-text-field
-              v-model="form.email"
-              label="Email"
-              type="email"
-              variant="outlined"
-              required
-              density="comfortable"
-              class="mb-2"
-            ></v-text-field>
+        <v-textarea
+          v-model="form.mensagem"
+          label="Mensagem"
+          variant="outlined"
+          rows="4"
+          required
+          class="mb-6"
+          style="resize: vertical;"
+        ></v-textarea>
 
-            <v-textarea
-              v-model="form.mensagem"
-              label="Mensagem"
-              variant="outlined"
-              rows="5"
-              required
-              density="comfortable"
-              class="mb-4"
-            ></v-textarea>
-
-            <v-btn 
-              type="submit" 
-              color="primary" 
-              size="large" 
-              block
-              :loading="loading"
-              elevation="2"
-            >
-              Enviar Mensagem
-            </v-btn>
-          </v-form>
-        </v-card>
-      </v-col>
-    </v-row>
+        <v-btn
+          type="submit"
+          variant="flat"
+          color="primary"
+          block
+          size="large"
+          height="54"
+          :loading="loading"
+        >
+          Enviar Mensagem
+        </v-btn>
+      </v-form>
+    </v-card>
   </v-container>
+
+  <Footer />
 </template>
 
-<style scoped lang="scss">
-.map-wrapper {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  overflow: hidden;
-  height: 100%;
-  min-height: 350px;
-  
-  iframe {
-    display: block;
-  }
-}
-
-// Pequeno ajuste para garantir que as colunas tenham a mesma altura em desktop
-@media (min-width: 960px) {
-  .v-row {
-    display: flex;
-  }
+<style scoped>
+.v-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
