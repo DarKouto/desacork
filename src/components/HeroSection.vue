@@ -9,7 +9,6 @@
     <h1>Desacork.com</h1>
     <p>Com Vue e Vuetify</p>
     <p>{{ texto }}</p>
-    <hr/>
   </div>
 </template>
 
