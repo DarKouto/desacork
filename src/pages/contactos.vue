@@ -1,14 +1,12 @@
 <script setup>
 import { reactive, ref } from 'vue';
 
-// 1. Estado dos dados
 const form = reactive({
   nome: '',
   email: '',
   mensagem: ''
 });
 
-// 2. Estado dos erros (Obrigatorio para o :error-messages não quebrar)
 const formErrors = reactive({
   nome: '',
   email: '',
@@ -17,11 +15,11 @@ const formErrors = reactive({
 
 const loading = ref(false);
 
-// 3. Função de Validação
+const successMessage = ref(''); // Estado para a mensagem de sucesso
+const failureMessage = ref(''); // Estado para a mensagem de falha
+
 const validateForm = () => {
   let isValid = true;
-  
-  // Limpa erros anteriores
   formErrors.nome = '';
   formErrors.email = '';
   formErrors.mensagem = '';
@@ -47,11 +45,13 @@ const validateForm = () => {
   return isValid;
 };
 
-// 4. Função de Envio
 const enviarMensagem = async () => {
   if (!validateForm()) return;
 
   loading.value = true;
+  successMessage.value = '';
+  failureMessage.value = '';
+
   try {
     const response = await fetch('/api/contact', {
       method: 'POST',
@@ -62,13 +62,20 @@ const enviarMensagem = async () => {
     const res = await response.json();
     
     if (response.ok) {
-      alert(res.message);
+      
+      // alert(res.message);
+
+      successMessage.value = res.message || "Email enviado com sucesso!";
       form.nome = ''; form.email = ''; form.mensagem = '';
     } else {
-      alert(res.message || "Erro no servidor.");
+
+      // alert(res.message || "Erro no servidor.");
+      failureMessage.value = res.message || "Erro no servidor. Tente novamente.";
+
     }
   } catch (error) {
-    alert("Erro ao ligar ao servidor.");
+    // alert("Erro ao ligar ao servidor.");
+    failureMessage.value = res.message || "Erro ao ligar ao servidor. Verifique a ligação.";
   } finally {
     loading.value = false;
   }
@@ -115,6 +122,29 @@ const enviarMensagem = async () => {
 
     <v-card elevation="3" class="pa-8 mt-10">
       <h2 class="text-h5 mb-8 text-left">Envie-nos uma mensagem</h2>
+
+        <v-alert
+            v-if="successMessage"
+            type="success"
+            variant="tonal"
+            class="mb-6"
+            closable
+            @click:close="successMessage = ''"
+          >
+            {{ successMessage }}
+          </v-alert>
+          <v-alert
+            v-if="failureMessage"
+            type="success"
+            variant="tonal"
+            class="mb-6"
+            closable
+            @click:close="failureMessage = ''"
+          >
+            {{ failureMessage }}
+          </v-alert>
+
+
       <v-form @submit.prevent="enviarMensagem">
         <v-text-field
           v-model="form.nome"
