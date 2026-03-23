@@ -68,7 +68,7 @@ const enviarMensagem = async () => {
       failureMessage.value = res.message || "Erro no servidor. Tente novamente.";
     }
   } catch (error) {
-    failureMessage.value = res.message = "Erro ao ligar ao servidor. Verifique a ligação.";
+    alert("Erro ao ligar ao servidor.");
   } finally {
     loading.value = false;
   }
