@@ -19,7 +19,9 @@
     ></v-app-bar-nav-icon>
 
     <v-app-bar-title class="font-weight-bold">
-      Desacork
+      <router-link to="/" style="text-decoration: none; color: inherit;">
+        Desacork
+      </router-link>
     </v-app-bar-title>
 
     <v-spacer></v-spacer>

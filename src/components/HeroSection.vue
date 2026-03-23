@@ -16,20 +16,28 @@
           <v-col cols="12" md="8" lg="6">
             
             <h1 class="text-h2 font-weight-bold text-white mb-6">
-              Desacork.com
+              Desacork, LDA.
             </h1>
 
             <p class="text-h5 text-white mb-10">
-              A sua parceira de confiança no mundo da cortiça. Soluções inovadoras e sustentáveis para a indústria.
-            </p>
-            <p class="text-h5 text-white mb-10">
-              Site em construção
+              A sua parceira de confiança no mundo da cortiça. <br/>Soluções inovadoras e sustentáveis.
             </p>
 
             <v-btn
               size="x-large"
               color="secondary"
               elevation="8"
+              class="ma-4"
+              to="/sobre-nos"
+            >
+              Sobre Nós
+            </v-btn>
+
+            <v-btn
+              size="x-large"
+              color="secondary"
+              elevation="8"
+              class="ma-4"
               to="/contactos"
             >
               Contactos
