@@ -1,4 +1,6 @@
 <script setup>
+  import celiegeImg from '@/images/celiege.png';
+  const celiegeImage = celiegeImg;
 </script>
 
 <template>
@@ -6,6 +8,7 @@
     class="bg-grey-lighten-3 text-center d-flex flex-column py-6 mt-auto"
     style="width: 100%; border-top: 1px solid #e0e0e0;"
   >
+    <v-img :src="celiegeImage"width="80"></v-img>
     <v-container>
       <div class="text-body-2 text-medium-emphasis mb-2">
         Copyright © {{ new Date().getFullYear() }}: 
