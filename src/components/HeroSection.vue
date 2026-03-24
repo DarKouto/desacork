@@ -1,6 +1,5 @@
 <script setup>
-  import fundoImg from '@/images/fundo.jpg';
-  const backgroundImage = fundoImg; 
+  import backgroundImage from '@/images/fundo.jpg';
 </script>
 
 <template>
