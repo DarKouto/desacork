@@ -31,9 +31,11 @@
 </template>
 
 <style scoped>
+/*
 .text-body-2 { 
-  font-size: 1.3rem !important;
+  font-size: 1.1rem !important;
 }
+*/
 
 .github-link {
   color: inherit;
