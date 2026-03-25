@@ -2,7 +2,6 @@
 </script>
 
 <template>
-<AppBar />
   <v-container class="py-12">
     <v-row justify="center" class="mb-12">
       <v-col cols="12" md="10" lg="8" class="text-center">
@@ -58,7 +57,6 @@
       </v-col>
     </v-row>
   </v-container>
-<Footer />
 </template>
 
 <style scoped>

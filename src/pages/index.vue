@@ -4,6 +4,8 @@
 <template>
   <AppBar />
   <HeroSection />
+  <SobreNos />
+  <Contactos />
   <Footer />
 </template>
 
