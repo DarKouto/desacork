@@ -6,6 +6,7 @@
   import linuxTux from '@/images/linuxtux.png'
   import qualco from '@/images/qualco.png'
   import apcor from '@/images/apcor.svg'
+  import bureauveritas from '@/images/bureauveritas.png'
 </script>
 
 <template>
@@ -22,16 +23,14 @@
         </v-col>
 
         <!-- LOGOS -->
-        <v-col cols="12" class="d-flex justify-center align-center ga-4 mb-6">
-          <div class="d-flex flex-column ga-2" style="width: 120px;">
-            <v-img :src="centralgest" max-height="20" contain></v-img>
-            <v-img :src="qualco" max-height="20" contain></v-img>
-          </div>
-          <v-img :src="apcor" max-width="110" max-height="45" contain></v-img>
-          <v-img :src="vueLogo" max-width="45" max-height="45" contain></v-img>
-          <v-img :src="linuxTux" max-width="45" max-height="45" contain></v-img>
-          <v-img :src="cachyos" max-width="45" max-height="45" contain></v-img>
-          
+        <v-col cols="12" class="d-flex justify-center align-center ga-4 mb-6 flex-wrap" >
+          <v-img :src="bureauveritas" max-width="45" min-width="40" max-height="110" contain></v-img>
+          <v-img :src="apcor" max-width="110" min-width="100" max-height="45" contain></v-img>
+          <v-img :src="vueLogo" max-width="45" min-width="40" max-height="45" contain></v-img>
+          <v-img :src="linuxTux" max-width="45" min-width="40" max-height="45" contain></v-img>
+          <v-img :src="cachyos" max-width="45" min-width="40" max-height="45" contain></v-img>
+          <v-img :src="centralgest" max-width="110" min-width="100" max-height="45" contain></v-img>
+          <v-img :src="qualco" max-width="110" min-width="100" max-height="45" contain></v-img>
         </v-col> 
 
         <!-- COPYRIGHT -->
