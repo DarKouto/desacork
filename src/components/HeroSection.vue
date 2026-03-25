@@ -8,7 +8,7 @@
     goTo('#sobre-nos', {
       duration: 800,
       easing: 'easeInOutCubic',
-      offset: -64, // O mesmo offset que usaste na AppBar
+      offset: -64,
     });
   };
 </script>
