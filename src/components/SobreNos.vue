@@ -1,4 +1,14 @@
 <script setup>
+  import { useGoTo } from 'vuetify';
+  const goTo = useGoTo();
+  const scrollToContactos = () => {
+    goTo('#contactos', {
+      duration: 800,
+      easing: 'easeInOutCubic',
+      offset: -64,
+    });
+  };
+
 </script>
 
 <template>
@@ -28,14 +38,14 @@
       </v-col>
       
       <v-col cols="12" md="6" class="pl-md-10">
-        <h2 class="text-h4 font-weight-bold mb-4">Três Décadas de Know-How</h2>
+        <h2 class="text-h4 font-weight-bold mb-4">Três Décadas de Profissionalismo</h2>
         <p class="text-body-1 mb-4">
           A Desacork nasceu em 1992 com um objetivo claro: elevar o padrão de acabamento das rolhas de cortiça.
         </p>
         <p class="text-body-1 mb-6">
           Embora o mercado tenha evoluído, os nossos valores mantêm-se intactos. Focamo-nos na <strong>retificação, lavação e colmatagem</strong>, processos críticos que garantem a neutralidade sensorial e a performance mecânica que os vinhos e bebidas espirituosas mais exigentes requerem.
         </p>
-        <v-btn color="primary" variant="outlined" to="/contactos">Fale connosco</v-btn>
+        <v-btn color="primary" variant="outlined" @click="scrollToContactos">Fale connosco</v-btn>
       </v-col>
     </v-row>
 

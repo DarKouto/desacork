@@ -1,5 +1,4 @@
 <script setup>
-  console.log("Este é o App.vue")
 </script>
 
 <template>
