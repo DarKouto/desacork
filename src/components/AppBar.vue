@@ -25,8 +25,8 @@
   onMounted(() => {
     const options = {
       root: null,
-      rootMargin: '-65px 0px -70% 0px',
-      threshold: 0
+      rootMargin: '-64px 0px -40% 0px', 
+      threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries) => {
