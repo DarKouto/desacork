@@ -1,4 +1,5 @@
 <script setup>
+  import desacork1 from '@/images/desacork1.png';
   import { ref } from 'vue';
   const drawer = ref(false);
   const navItems = [
@@ -20,6 +21,7 @@
 
     <v-app-bar-title class="font-weight-bold">
       <router-link to="/" style="text-decoration: none; color: inherit;">
+        <v-img :src="desacork1" max-width="45" min-width="40"contain></v-img>
         Desacork
       </router-link>
     </v-app-bar-title>

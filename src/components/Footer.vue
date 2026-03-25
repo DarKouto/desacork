@@ -30,10 +30,10 @@
           <v-img :src="bureauveritas" max-width="45" min-width="40" max-height="110" contain></v-img>
           <v-img :src="apcor" max-width="110" min-width="100" max-height="45" contain></v-img>
           <v-img :src="qualco" max-width="110" min-width="100" max-height="45" contain></v-img>
+          <v-img :src="centralgest" max-width="110" min-width="100" max-height="45" contain></v-img>
           <v-img :src="vueLogo" max-width="45" min-width="40" max-height="45" contain></v-img>
           <v-img :src="linuxTux" max-width="45" min-width="40" max-height="45" contain></v-img>
           <v-img :src="cachyos" max-width="45" min-width="40" max-height="45" contain></v-img>
-          <v-img :src="centralgest" max-width="110" min-width="100" max-height="45" contain></v-img>
         </v-col> 
 
         <!-- COPYRIGHT -->
