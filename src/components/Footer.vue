@@ -5,6 +5,7 @@
   import vueLogo from '@/images/vuelogo.png'
   import linuxTux from '@/images/linuxtux.png'
   import qualco from '@/images/qualco.png'
+  import apcor from '@/images/apcor.svg'
 </script>
 
 <template>
@@ -13,7 +14,7 @@
     style="width: 100%; border-top: 1px solid #e0e0e0;"
   >
     <v-container>
-      <v-row align="center" justify="center">
+      <v-row align="center" justify="center" class="flex-column">
 
         <!-- CELIEGE -->
         <v-col cols="12" class="d-flex justify-center mb-4">
@@ -21,23 +22,25 @@
         </v-col>
 
         <!-- LOGOS -->
-        <v-col cols="12" md="4" class="d-flex justify-center justify-md-end ga-4">
-          <div class="d-flex flex-column ga-2" style="width: 120px; max-height: 30px;">
+        <v-col cols="12" class="d-flex justify-center align-center ga-4 mb-6">
+          <div class="d-flex flex-column ga-2" style="width: 120px;">
             <v-img :src="centralgest" max-height="20" contain></v-img>
             <v-img :src="qualco" max-height="20" contain></v-img>
           </div>
+          <v-img :src="apcor" max-width="110" max-height="45" contain></v-img>
           <v-img :src="vueLogo" max-width="45" max-height="45" contain></v-img>
           <v-img :src="linuxTux" max-width="45" max-height="45" contain></v-img>
           <v-img :src="cachyos" max-width="45" max-height="45" contain></v-img>
+          
         </v-col> 
 
         <!-- COPYRIGHT -->
-        <v-col cols="12" md="8" class="text-center text-md-left">
+        <v-col cols="12" class="text-center">
           <div class="text-body-2 text-medium-emphasis mb-2">
             Copyright © {{ new Date().getFullYear() }}: 
             <strong>Desacork</strong>
           </div>
-          <div class="d-flex align-center justify-center justify-md-start text-body-2 text-medium-emphasis">
+          <div class="d-flex align-center justify-center text-body-2 text-medium-emphasis">
             <v-icon size="16" class="mr-1">mdi-console</v-icon>
             <span class="mr-1">Desenvolvido por</span>
             <a
@@ -56,6 +59,7 @@
     </v-container>
   </v-footer>
 </template>
+
 
 <style scoped>
   .github-link {
