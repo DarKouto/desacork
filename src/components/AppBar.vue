@@ -20,11 +20,16 @@
     ></v-app-bar-nav-icon>
 
     <v-app-bar-title class="font-weight-bold">
-      <router-link to="/" style="text-decoration: none; color: inherit;">
-        <v-img :src="desacork1" max-width="45" min-width="40"contain></v-img>
-        Desacork
+      <router-link 
+        to="/" 
+        class="d-flex align-center" 
+        style="text-decoration: none; color: inherit;"
+      >
+        <v-img :src="desacork1" max-width="45" class="mr-3" contain></v-img>
+        <span>Desacork</span>
       </router-link>
     </v-app-bar-title>
+    
 
     <v-spacer></v-spacer>
 
