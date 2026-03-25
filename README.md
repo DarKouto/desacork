@@ -1,6 +1,6 @@
-# Desacork.com in Vue.js
+# Desacork.com Website made with Vue.js and Vuetify
 
-## Desacork.com Website made with Vue.js and Vuetify
+## https://www.desacork.com/
 
 Project started with 'npm create vuetify@latest' and the  **Default Preset** for several key reasons:
 * **Setup:** Installs and configures both Vue.js and Vuetify in one go, providing a solid foundation and opinionated structure.
