@@ -6,9 +6,8 @@
     <AppBar />
 
     <v-main>
-      <section id="home">
+      <div id="home" style="position: absolute; top: 0;"></div>
         <HeroSection />
-      </section>
 
       <section id="sobre-nos">
         <SobreNos />

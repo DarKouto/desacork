@@ -78,22 +78,37 @@
     </div>
   </v-app-bar>
 
-  <v-navigation-drawer
-    v-model="drawer"
-    location="left"
-    temporary
-  >
-    <v-list>
-      <v-list-item
-        v-for="item in navItems"
-        :key="item.title"
-        :active="activeSection === item.target"
-        color="primary"
-        @click="handleNav(item.target)"
-      >
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
+<v-navigation-drawer
+  v-model="drawer"
+  location="left"
+  temporary
+  app
+  touchless
+  style="position: fixed !important; height: 100vh !important;"
+>
+    <div class="pa-4 text-h6 font-weight-bold text-primary d-flex align-center">
+      <v-icon icon="mdi-menu" class="mr-2"></v-icon>
+      Menu
+    </div>
+
+    <v-divider class="mb-2"></v-divider>
+
+    <div 
+      v-for="item in navItems" 
+      :key="item.title"
+      class="nav-mobile-item mb-2"
+      :class="{ 'active-mobile': activeSection === item.target }"
+      @click="handleNav(item.target)"
+    >
+      <v-icon 
+        :icon="item.target === '#home' ? 'mdi-home' : (item.target === '#sobre-nos' ? 'mdi-information' : 'mdi-email')"
+        class="mr-4"
+        :color="activeSection === item.target ? 'primary' : 'grey-darken-1'"
+      ></v-icon>
+      <span :class="activeSection === item.target ? 'text-primary font-weight-bold' : 'text-grey-darken-3'">
+        {{ item.title }}
+      </span>
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -112,5 +127,22 @@
   background-color: rgba(255, 255, 255, 0.15) !important;
   border-radius: 0;
   opacity: 1;
+}
+.nav-mobile-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(var(--v-theme-primary), 0.05);
+  }
+}
+
+.active-mobile {
+  background-color: rgba(var(--v-theme-primary), 0.1) !important;
+  border-left: 4px solid rgb(var(--v-theme-primary));
 }
 </style>

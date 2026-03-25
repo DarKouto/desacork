@@ -1,5 +1,16 @@
 <script setup>
   import backgroundImage from '@/images/fundo.jpg';
+  import { useGoTo } from 'vuetify';
+
+  const goTo = useGoTo();
+
+  const scrollToSobre = () => {
+    goTo('#sobre-nos', {
+      duration: 800,
+      easing: 'easeInOutCubic',
+      offset: -64, // O mesmo offset que usaste na AppBar
+    });
+  };
 </script>
 
 <template>
@@ -27,19 +38,9 @@
               color="secondary"
               elevation="8"
               class="ma-4"
-              to="/sobre-nos"
+              @click="scrollToSobre"
             >
               Sobre Nós
-            </v-btn>
-
-            <v-btn
-              size="x-large"
-              color="secondary"
-              elevation="8"
-              class="ma-4"
-              to="/contactos"
-            >
-              Contactos
             </v-btn>
 
           </v-col>
