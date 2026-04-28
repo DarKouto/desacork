@@ -1,4 +1,5 @@
 <script setup>
+  import backgroundImage from '@/images/fundo.jpg';
   import { useGoTo } from 'vuetify';
   const goTo = useGoTo();
   const scrollToContactos = () => {
@@ -31,8 +32,12 @@
             height="400"
             class="d-flex align-center justify-center"
           >
-            <v-icon size="64" color="grey-darken-1">mdi-factory</v-icon>
-            <span class="ml-2 text-grey-darken-1 italic">Espaço para foto da fábrica</span>
+          <v-img
+            :src="backgroundImage"
+            class="align-center"
+            cover
+            height="100vh" 
+          ></v-img>
           </v-sheet>
         </v-card>
       </v-col>
